@@ -22,7 +22,6 @@ class Circle:
         x_diff=abs(self.center.x-point.x)
         y_diff=abs(self.center.y-point.y)
         distance=math.sqrt((x_diff**2)+(y_diff**2))
-        print("distance: " + str(distance))
         return distance<=self.radius
 class Line:
     def __init__(self,slope,arg):
