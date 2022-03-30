@@ -1,6 +1,6 @@
 import math
 import shapes_module as sm
-circle=sm.Circle(sm.Point(0,0),5)
+circle=sm.Circle(sm.Point(2,3),5)
 # print(circle.contains_point(Point(-3,-3.9)))
 line1=sm.Line(4,1,11)
 line2=sm.Line(3,2)

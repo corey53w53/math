@@ -4,13 +4,15 @@ class Point:
         self.x=x
         self.y=y
     def __str__(self):
-        return str(self.x)+", "+str(self.y)
+        return f'({self.x}, {self.y})'
 
 class Circle:
     def __init__(self, center, radius):
         self.center=center
         self.radius=radius
         self.update_area()
+    def __str__(self):
+        return(f'center: {self.center}\nradius: {self.radius}')
     def expand_rad(self, inc):
         self.radius+=inc
         self.update_area()
