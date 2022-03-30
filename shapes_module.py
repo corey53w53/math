@@ -25,13 +25,15 @@ class Circle:
         print("distance: " + str(distance))
         return distance<=self.radius
 class Line:
-    def __init__(self,slope,*args):
+    def __init__(self,slope,arg):
         self.slope=slope
-        if len(args)==1:
-            self.y_int=args[0]
+        if isinstance(arg,int):
+            self.y_int=arg
         else:
-            self.point=Point(args[0],args[1])
+            self.point=Point(arg[0],arg[1])
             self.y_int=self.calc_y_int()
+    def __str__(self):
+        return (f'y={self.slope}x+{self.y_int}')
     def calc_y(self,x):
         return (x*self.slope)+self.y_int
     def calc_y_int(self):
