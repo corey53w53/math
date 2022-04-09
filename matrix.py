@@ -4,7 +4,6 @@ class Matrix:
         self.row=row
         self.col=col
         self.raw_values=values
-
         big_list=[]
         counter=0
         for _ in range(row):
@@ -52,9 +51,12 @@ class Matrix:
         for row in self.list_rows:
             for col in m2.list_cols: raw_values.append(sum([row[c]*col[c] for c in range(self.col)]))
         return Matrix(self.row,m2.col,raw_values)
-        
+
 m1=Matrix(3,3,[2,2,3,4,5,100,7,8,-10])
 m2=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
 print(m1)
 print(m2)
 print(m1*m2)
+#TODO
+#find way to calc determinant
+#find way to calc inverse
