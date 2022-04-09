@@ -17,20 +17,15 @@ class Matrix:
         list_rows=[]
         for r in self.values:
             small_list=[]
-            for c in r:
-                small_list.append(c)
+            for c in r: small_list.append(c)
             list_rows.append(small_list)
         self.list_rows=list_rows
         list_cols=[]
-        
         for c in range(self.col):
             small_list=[]
-            for r in range(self.row):
-                small_list.append(list_rows[r][c])
+            for r in range(self.row): small_list.append(list_rows[r][c])
             list_cols.append(small_list)
         self.list_cols=list_cols
-        self.max_digits=len(str(max([v for v in values]+[abs(10*v) for v in values if v<0])))
-        #i feel proud for thinking of line above, takes into account the negative sign.
         self.max_digits_list=[len(str(max([v for v in c]+[abs(10*v) for v in c if v<0]))) for c in list_cols]
     def __str__(self):
         big_s_list=[]
@@ -55,20 +50,11 @@ class Matrix:
         assert (self.col==m2.row), "number of columns in first matrix does not equal number of rows in second matrix"
         raw_values=[]
         for row in self.list_rows:
-            for col in m2.list_cols:
-                raw_values.append(sum([row[c]*col[c] for c in range(self.col)]))
+            for col in m2.list_cols: raw_values.append(sum([row[c]*col[c] for c in range(self.col)]))
         return Matrix(self.row,m2.col,raw_values)
         
-# m1=Matrix(3,3,[2,2,3,4,5,100,7,8,-10])
-# m2=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
-# print(m1*m2)
-m3=Matrix(2,3,[10000,2,300000,40,50000,6])
-m4=Matrix(3,2,[10,11,20,21,30,3001])
-print(m3*m4)
-#10 11
-#
-print(m3)
-print(m4)
-m5=Matrix(2,2,[9100040,90041004,1000580,1068446])
-print(m5)
-s="1234"
+m1=Matrix(3,3,[2,2,3,4,5,100,7,8,-10])
+m2=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
+print(m1)
+print(m2)
+print(m1*m2)
