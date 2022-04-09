@@ -1,12 +1,11 @@
 class Matrix:
     def __init__(self, row, col, values):
-        assert row*col==len(values),"number of values does not match rows and columns"
+        assert (row*col==len(values)),"number of values does not match rows and columns"
         self.row=row
         self.col=col
         self.raw_values=values
-        self.max_digits=len(str(max([abs(v) for v in values]+[abs(10*v) for v in values if v<0])))
+        self.max_digits=len(str(max([v for v in values]+[abs(10*v) for v in values if v<0])))
         #i feel proud for thinking of line above, takes into account the negative sign.
-        print(self.max_digits)
         big_list=[]
         small_list=[]
         counter=0
@@ -26,6 +25,11 @@ class Matrix:
             small_s+="|\n"
             big_s+=small_s
         return big_s
-
-m1=Matrix(3,3,[1,2,3,4,5,6,7,8,-100])
+    def __add__(self,m2):
+        assert (self.col==m2.col and self.row==m2.row),"columns or rows are not equal"
+        return Matrix(self.row,self.col,[(self.raw_values[c]+m2.raw_values[c]) for c in range(len(self.raw_values))])
+m1=Matrix(3,3,[1,2,3,4,5,600000,7,8,-100])
+m2=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
+m3=m1+m2
 print(m1)
+print(m3)
