@@ -4,8 +4,7 @@ class Matrix:
         self.row=row
         self.col=col
         self.raw_values=values
-        self.max_digits=len(str(max([v for v in values]+[abs(10*v) for v in values if v<0])))
-        #i feel proud for thinking of line above, takes into account the negative sign.
+
         big_list=[]
         counter=0
         for _ in range(row):
@@ -30,12 +29,24 @@ class Matrix:
                 small_list.append(list_rows[r][c])
             list_cols.append(small_list)
         self.list_cols=list_cols
+        self.max_digits=len(str(max([v for v in values]+[abs(10*v) for v in values if v<0])))
+        #i feel proud for thinking of line above, takes into account the negative sign.
+        self.max_digits_list=[len(str(max([v for v in c]+[abs(10*v) for v in c if v<0]))) for c in list_cols]
     def __str__(self):
         big_s=""
         for small_list in self.values:
             small_s="|"
-            for v in small_list:
-                small_s+=str(v).center(self.max_digits)
+            counter=0
+            while counter<len(small_list):
+                if counter==0:
+                    small_s+=str(small_list[counter]).ljust(self.max_digits_list[counter]+1)
+                    counter+=1
+                elif counter==len(small_list)-1:
+                    small_s+=str(small_list[counter]).rjust(self.max_digits_list[counter]+1)
+                    counter+=1
+                else:
+                    small_s+=str(small_list[counter]).center(self.max_digits_list[counter])
+                    counter+=1
             big_s+=small_s+"|\n"
         return big_s
     def __add__(self,m2):
@@ -55,6 +66,10 @@ class Matrix:
 # m1=Matrix(3,3,[2,2,3,4,5,100,7,8,-10])
 # m2=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
 # print(m1*m2)
-m3=Matrix(2,3,[1,2,3,4,5,6])
-m4=Matrix(3,1,[7,8,9])
+m3=Matrix(2,3,[10000,2,300000,40,50000,6])
+m4=Matrix(3,2,[10,11,20,21,30,3001])
 print(m3*m4)
+#10 11
+#
+print(m3)
+print(m4)
