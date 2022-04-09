@@ -13,19 +13,14 @@ class Matrix:
                 counter+=1
             counter+=1
             big_list.append(small_list)
-        print(big_list)
         self.values=big_list
+    def __str__(self):
+        s=""
+        for small_list in self.values:
+            s+=f'|{" ".join([str(a) for a in small_list])}|\n'
+        return s
 
-#1 2
-#3 4
-matrix1=[[1,2],[3,4]]
-#3 1
-#1 0
-matrix2=[[3,1],[1,0]]
-
+#|1 3 2|
+#|3 4 4|
 m1=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
-
-l=[]
-for r in matrix1:
-    for c in r:
-        pass
+print(m1)
