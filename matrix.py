@@ -33,21 +33,17 @@ class Matrix:
         #i feel proud for thinking of line above, takes into account the negative sign.
         self.max_digits_list=[len(str(max([v for v in c]+[abs(10*v) for v in c if v<0]))) for c in list_cols]
     def __str__(self):
-        big_s=""
+        big_s_list=[]
         for small_list in self.values:
             small_s="|"
             counter=0
             while counter<len(small_list):
-                if counter==0:
-                    small_s+=str(small_list[counter]).ljust(self.max_digits_list[counter]+1)
-                    counter+=1
-                elif counter==len(small_list)-1:
-                    small_s+=str(small_list[counter]).rjust(self.max_digits_list[counter]+1)
-                    counter+=1
-                else:
-                    small_s+=str(small_list[counter]).center(self.max_digits_list[counter])
-                    counter+=1
-            big_s+=small_s+"|\n"
+                small_s+=str(small_list[counter]).center(self.max_digits_list[counter]+1)
+                counter+=1
+            big_s_list.append(small_s)
+        while all([s[-1]==' ' for s in big_s_list]): big_s_list=[b[:-1] for b in big_s_list]
+        big_s=""
+        for s in big_s_list: big_s+=s+"|\n"
         return big_s
     def __add__(self,m2):
         assert (self.col==m2.col and self.row==m2.row),"columns or rows are not equal"
@@ -73,3 +69,6 @@ print(m3*m4)
 #
 print(m3)
 print(m4)
+m5=Matrix(2,2,[9100040,90041004,1000580,1068446])
+print(m5)
+s="1234"
