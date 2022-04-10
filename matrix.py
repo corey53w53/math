@@ -62,7 +62,13 @@ class Matrix:
                     raw_values_list.append(self.raw_values[self.col*r+c])
         return Matrix(self.row-1,self.col-1,raw_values_list)
     def transpose(self):
-        return Matrix(self.col,self.row,[l[c] for l in self.list_rows for c in range(len(self.list_cols))])
+        big_list=[]
+        for counter in range(len(self.list_cols)):
+            small_list=[]
+            for l in self.list_rows:
+                small_list.append(l[counter])
+            big_list+=small_list
+        return Matrix(self.col,self.row,big_list)
     def sign_rule(self):
         assert self.col==self.row, "not a square matrix"
         new_raw_value_list=[]
@@ -71,14 +77,19 @@ class Matrix:
                 if (r+c)%2: new_raw_value_list.append(-self.list_rows[r][c])
                 else: new_raw_value_list.append(self.list_rows[r][c])
         return Matrix(self.row,self.col,new_raw_value_list)
-    def adjoint(self):
+    def cofactor(self):
         assert self.col==self.row, "not a square matrix"
-        return Matrix(self.row,self.col,[self.minor(c,r).det() for c in range(self.col) for r in range(self.row)]).sign_rule()
+        return Matrix(self.row,self.col,[self.minor(c,r).det() for r in range(self.col) for c in range(self.row)]).sign_rule()
+    def adjoint(self):
+        m=self.cofactor()
+        return m.transpose()
     def inverse(self):
         return self.adjoint().transpose()
-m1=Matrix(3,3,[3,0,2,2,0,-2,0,1,1])
+m1=Matrix(3,3,[3,1,-1,2,-2,0,1,2,-1])
 print(m1)
-print(m1.inverse())
+print(m1.transpose())
+print("cofactor" + str(m1.cofactor()))
+print(m1.adjoint())
 # print(m1)
 # print(m1.minor(1))
 
