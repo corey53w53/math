@@ -4,20 +4,19 @@ class Matrix:
         self.row=row
         self.col=col
         self.raw_values=values
-        self.values=[]
-        counter=0
-        for _ in range(row):
-            small_list=[]
-            for _ in range(col):
-                small_list.append(values[counter])
-                counter+=1
-            self.values.append(small_list)
         self.list_rows=[]
-        for r in self.values:
+        counter=0
+        for r in range(row):
             small_list=[]
-            for c in r: small_list.append(c)
+            for c in range(col):
+                small_list.append(values[counter])
+                # print(r*self.row+c)
+                counter+=1
             self.list_rows.append(small_list)
         self.list_cols=[]
+        print(self.list_rows)
+        print(self.row)
+        print(self.col)
         for c in range(self.col):
             small_list=[]
             for r in range(self.row): small_list.append(self.list_rows[r][c])
@@ -25,7 +24,7 @@ class Matrix:
         self.max_digits_list=[len(str(max([v for v in c]+[abs(10*v) for v in c if v<0]))) for c in self.list_cols]
     def __str__(self):
         big_s_list=[]
-        for small_list in self.values:
+        for small_list in self.list_rows:
             small_s="|"
             counter=0
             while counter<len(small_list):
@@ -68,15 +67,15 @@ class Matrix:
                     raw_values_list.append(self.raw_values[self.col*r+c])
         return Matrix(self.row-1,self.col-1,raw_values_list)
 m1=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
-print(m1)
-print(m1.minor(1))
+# print(m1)
+# print(m1.minor(1))
 
 #1 2 3
 #4 5 6
 #7 8 9
-m2=Matrix(4,4,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
+m2=Matrix(2,8,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
 print(m2)
-print(m2.minor(0))
+# print(m2.minor(0))
 
 # print(m1)
 # print(m2)
