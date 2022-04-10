@@ -5,18 +5,13 @@ class Matrix:
         self.col=col
         self.raw_values=values
         self.list_rows=[]
-        counter=0
         for r in range(row):
             small_list=[]
             for c in range(col):
-                small_list.append(values[counter])
-                # print(r*self.row+c)
+                small_list.append(values[r*self.col+c])
                 counter+=1
             self.list_rows.append(small_list)
         self.list_cols=[]
-        print(self.list_rows)
-        print(self.row)
-        print(self.col)
         for c in range(self.col):
             small_list=[]
             for r in range(self.row): small_list.append(self.list_rows[r][c])
