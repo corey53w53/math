@@ -61,14 +61,8 @@ class Matrix:
                     raw_values_list.append(self.raw_values[self.col*r+c])
         return Matrix(self.row-1,self.col-1,raw_values_list)
     def transpose(self):
-        big_list=[]
-        for counter in range(len(self.list_cols)):
-            small_list=[]
-            for l in self.list_rows:
-                small_list.append(l[counter])
-            big_list+=small_list
-        return Matrix(self.col,self.row,big_list)
-m1=Matrix(3,3,[1,3,5,7,2,4,6,8,9])
+        return Matrix(self.col,self.row,[l[c] for l in self.list_rows for c in range(len(self.list_cols))])
+m1=Matrix(2,4,[1,3,5,7,2,4,6,8])
 print(m1)
 m2=m1.transpose()
 print(m2)
@@ -93,4 +87,3 @@ print(m2.transpose())
 # print(m2)
 # print(m1*m2)
 #TODO
-#find way to calc inverse
