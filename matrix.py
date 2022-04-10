@@ -51,12 +51,42 @@ class Matrix:
         for row in self.list_rows:
             for col in m2.list_cols: raw_values.append(sum([row[c]*col[c] for c in range(self.col)]))
         return Matrix(self.row,m2.col,raw_values)
+    def det(self):
+        assert self.col==self.row, "not a square matrix"
+        if self.col==self.row==2:
+            return self.raw_values[0]*self.raw_values[3]-self.raw_values[1]*self.raw_values[2]
+        else:
+            sum=0
+            for counter in range(self.row):
+                m=self.minor(counter)
+                if not counter%2:
+                    sum+=self.list_rows[0][counter]*m.det()
+                else:
+                    sum-=self.list_rows[0][counter]*m.det()
+                counter+=1
+            return sum
+    def minor(self,col_num, row_num=0):
+        assert col_num<self.col,"col_num argument is too large"
+        assert row_num<self.col,"row_num argument is too large"
+        raw_values_list=[]
+        for r in range(self.row):
+            for c in range(self.col):
+                if c!=col_num and r!=row_num:
+                    raw_values_list.append(self.raw_values[self.col*r+c])
+        return Matrix(self.row-1,self.col-1,raw_values_list)
+# m1=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
+# print(m1)
+# print(m1.minor(1))
 
-m1=Matrix(3,3,[2,2,3,4,5,100,7,8,-10])
-m2=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
-print(m1)
+#1 2 3
+#4 5 6
+#7 8 9
+m2=Matrix(3,3,[1,2,1,4,5,6,7,8,9])
 print(m2)
-print(m1*m2)
+print(m2.det())
+# print(m1)
+# print(m2)
+# print(m1*m2)
 #TODO
 #find way to calc determinant
 #find way to calc inverse
