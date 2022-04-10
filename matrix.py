@@ -53,17 +53,13 @@ class Matrix:
         return Matrix(self.row,m2.col,raw_values)
     def det(self):
         assert self.col==self.row, "not a square matrix"
-        if self.col==self.row==2:
-            return self.raw_values[0]*self.raw_values[3]-self.raw_values[1]*self.raw_values[2]
+        if self.col==self.row==2: return self.raw_values[0]*self.raw_values[3]-self.raw_values[1]*self.raw_values[2]
         else:
             sum=0
             for counter in range(self.row):
                 m=self.minor(counter)
-                if not counter%2:
-                    sum+=self.list_rows[0][counter]*m.det()
-                else:
-                    sum-=self.list_rows[0][counter]*m.det()
-                counter+=1
+                if counter%2: sum-=self.list_rows[0][counter]*m.det()
+                else: sum+=self.list_rows[0][counter]*m.det()
             return sum
     def minor(self,col_num, row_num=0):
         assert col_num<self.col,"col_num argument is too large"
@@ -84,7 +80,7 @@ class Matrix:
 m2=Matrix(4,4,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
 print(m2)
 print(m2.det())
-m1=Matrix(3,3,[6,7,8,10,11,12,14,15,16])
+m1=Matrix(3,3,[6,0,0,10,11,12,14,15,16])
 print(m1)
 print(m1.det())
 # print(m1)
