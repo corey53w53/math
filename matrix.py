@@ -81,9 +81,12 @@ class Matrix:
 #1 2 3
 #4 5 6
 #7 8 9
-m2=Matrix(3,3,[1,2,1,4,5,6,7,8,9])
+m2=Matrix(4,4,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
 print(m2)
 print(m2.det())
+m1=Matrix(3,3,[6,7,8,10,11,12,14,15,16])
+print(m1)
+print(m1.det())
 # print(m1)
 # print(m2)
 # print(m1*m2)
