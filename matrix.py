@@ -41,6 +41,15 @@ class Matrix:
         for row in self.list_rows:
             for col in m2.list_cols: raw_values.append(sum([row[c]*col[c] for c in range(self.col)]))
         return Matrix(self.row,m2.col,raw_values)
+    def minor(self,row_num,col_num):
+        assert col_num<self.col,"col_num argument is too large"
+        assert row_num<self.col,"row_num argument is too large"
+        raw_values_list=[]
+        for r in range(self.row):
+            for c in range(self.col):
+                if c!=col_num and r!=row_num:
+                    raw_values_list.append(self.raw_values[self.col*r+c])
+        return Matrix(self.row-1,self.col-1,raw_values_list).det()
     def det(self):
         assert self.col==self.row, "not a square matrix"
         if self.col==self.row==1: return self.raw_values[0]
@@ -51,15 +60,6 @@ class Matrix:
                 if counter%2: sum-=self.list_rows[0][counter]*self.minor(0,counter)
                 else: sum+=self.list_rows[0][counter]*self.minor(0,counter)
             return sum
-    def minor(self,row_num,col_num):
-        assert col_num<self.col,"col_num argument is too large"
-        assert row_num<self.col,"row_num argument is too large"
-        raw_values_list=[]
-        for r in range(self.row):
-            for c in range(self.col):
-                if c!=col_num and r!=row_num:
-                    raw_values_list.append(self.raw_values[self.col*r+c])
-        return Matrix(self.row-1,self.col-1,raw_values_list).det()
     def transpose(self):
         big_list=[]
         for counter in range(len(self.list_cols)):
@@ -83,29 +83,11 @@ class Matrix:
         m=self.cofactor()
         return m.transpose()
     def inverse(self):
-        return self.adjoint().transpose()
-m1=Matrix(3,3,[3,1,-1,2,-2,0,1,2,-1])
-print(m1)
+        m=self.adjoint()
+        new_raw_values=[round(value/self.det(),2) for value in m.raw_values]
+        return Matrix(self.row,self.col,new_raw_values)
+m1=Matrix(3,3,[1,2,3,4,5,6,7,8,10])
 print(m1.det())
-print(m1.transpose())
-print(m1.sign_rule())
-print(m1.cofactor())
-print(m1.adjoint())
-# print(m1)
-# print(m1.minor(1))
+print(m1.inverse())
 
-# 1 3
-#5 7 
-
-#1 3 5
-#2 4 6
-#1 1 1
-
-# m2=Matrix(2,8,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
-# print(m2)
-# print(m2.minor(0))
-
-# print(m1)
-# print(m2)
-# print(m1*m2)
-#TODO
+#TODO increase max digits list by 1 if there is a double, aka make it work with decimals
