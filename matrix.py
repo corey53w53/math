@@ -48,10 +48,10 @@ class Matrix:
         else:
             sum=0
             for counter in range(self.row):
-                if counter%2: sum-=self.list_rows[0][counter]*self.minor(counter)
-                else: sum+=self.list_rows[0][counter]*self.minor(counter)
+                if counter%2: sum-=self.list_rows[0][counter]*self.minor(0,counter)
+                else: sum+=self.list_rows[0][counter]*self.minor(0,counter)
             return sum
-    def minor(self,col_num, row_num=0):
+    def minor(self,row_num,col_num):
         assert col_num<self.col,"col_num argument is too large"
         assert row_num<self.col,"row_num argument is too large"
         raw_values_list=[]
@@ -78,7 +78,7 @@ class Matrix:
         return Matrix(self.row,self.col,new_raw_value_list)
     def cofactor(self):
         assert self.col==self.row, "not a square matrix"
-        return Matrix(self.row,self.col,[self.minor(c,r) for r in range(self.col) for c in range(self.row)]).sign_rule()
+        return Matrix(self.row,self.col,[self.minor(r,c) for r in range(self.col) for c in range(self.row)]).sign_rule()
     def adjoint(self):
         m=self.cofactor()
         return m.transpose()
