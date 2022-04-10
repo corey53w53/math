@@ -9,7 +9,6 @@ class Matrix:
             small_list=[]
             for c in range(col):
                 small_list.append(values[r*self.col+c])
-                counter+=1
             self.list_rows.append(small_list)
         self.list_cols=[]
         for c in range(self.col):
@@ -61,20 +60,37 @@ class Matrix:
                 if c!=col_num and r!=row_num:
                     raw_values_list.append(self.raw_values[self.col*r+c])
         return Matrix(self.row-1,self.col-1,raw_values_list)
-m1=Matrix(3,3,[1,2,3,4,5,6,7,8,9])
+    def transpose(self):
+        big_list=[]
+        for counter in range(len(self.list_cols)):
+            small_list=[]
+            for l in self.list_rows:
+                small_list.append(l[counter])
+            big_list+=small_list
+        return Matrix(self.col,self.row,big_list)
+m1=Matrix(3,3,[1,3,5,7,2,4,6,8,9])
+print(m1)
+m2=m1.transpose()
+print(m2)
+print(m2.transpose())
+
 # print(m1)
 # print(m1.minor(1))
 
-#1 2 3
-#4 5 6
-#7 8 9
-m2=Matrix(2,8,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
-print(m2)
+# 1 2 
+# 3 4 
+# 5 6 
+# 7 8
+
+#1 3 5 7 
+#2 4 6 8
+
+# m2=Matrix(2,8,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
+# print(m2)
 # print(m2.minor(0))
 
 # print(m1)
 # print(m2)
 # print(m1*m2)
 #TODO
-#find way to calc determinant
 #find way to calc inverse
