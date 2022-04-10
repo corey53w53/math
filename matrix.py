@@ -74,10 +74,11 @@ class Matrix:
     def adjoint(self):
         assert self.col==self.row, "not a square matrix"
         return Matrix(self.row,self.col,[self.minor(c,r).det() for c in range(self.col) for r in range(self.row)]).sign_rule()
-
-m1=Matrix(3,3,[1,2,4,5,6,7,8,9,10])
+    def inverse(self):
+        return self.adjoint().transpose()
+m1=Matrix(3,3,[3,0,2,2,0,-2,0,1,1])
 print(m1)
-print(m1.adjoint())
+print(m1.inverse())
 # print(m1)
 # print(m1.minor(1))
 
