@@ -43,7 +43,8 @@ class Matrix:
         return Matrix(self.row,m2.col,raw_values)
     def det(self):
         assert self.col==self.row, "not a square matrix"
-        if self.col==self.row==2: return self.raw_values[0]*self.raw_values[3]-self.raw_values[1]*self.raw_values[2]
+        if self.col==self.row==1: return self.raw_values[0]
+        elif self.col==self.row==2: return self.raw_values[0]*self.raw_values[3]-self.raw_values[1]*self.raw_values[2]
         else:
             sum=0
             for counter in range(self.row):
@@ -62,22 +63,30 @@ class Matrix:
         return Matrix(self.row-1,self.col-1,raw_values_list)
     def transpose(self):
         return Matrix(self.col,self.row,[l[c] for l in self.list_rows for c in range(len(self.list_cols))])
-m1=Matrix(2,4,[1,3,5,7,2,4,6,8])
-print(m1)
-m2=m1.transpose()
-print(m2)
-print(m2.transpose())
+    def sign_rule(self):
+        assert self.col==self.row, "not a square matrix"
+        new_raw_value_list=[]
+        for r in range(self.row):
+            for c in range(self.col):
+                if (r+c)%2: new_raw_value_list.append(-self.list_rows[r][c])
+                else: new_raw_value_list.append(self.list_rows[r][c])
+        return Matrix(self.row,self.col,new_raw_value_list)
+    def adjoint(self):
+        assert self.col==self.row, "not a square matrix"
+        return Matrix(self.row,self.col,[self.minor(c,r).det() for c in range(self.col) for r in range(self.row)]).sign_rule()
 
+m1=Matrix(3,3,[1,2,4,5,6,7,8,9,10])
+print(m1)
+print(m1.adjoint())
 # print(m1)
 # print(m1.minor(1))
 
-# 1 2 
-# 3 4 
-# 5 6 
-# 7 8
+# 1 3
+#5 7 
 
-#1 3 5 7 
-#2 4 6 8
+#1 3 5
+#2 4 6
+#1 1 1
 
 # m2=Matrix(2,8,[1,0,0,0,5,6,7,8,9,10,11,12,13,14,15,16])
 # print(m2)
