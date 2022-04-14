@@ -1,3 +1,4 @@
+import random
 class Matrix:
     def __init__(self, row, col, values):
         assert (row*col==len(values)),"number of values does not match rows and columns"
@@ -86,8 +87,14 @@ class Matrix:
         m=self.adjoint()
         new_raw_values=[round(value/self.det(),2) for value in m.raw_values]
         return Matrix(self.row,self.col,new_raw_values)
+def random_matrix(rows=3,cols=3,min=0,max=10):
+    rand_list=[]
+    for _ in range(rows*cols):
+        rand_list.append(random.randint(min,max))
+    return Matrix(rows,cols,rand_list)
 m1=Matrix(3,3,[1,2,3,4,5,6,7,8,10])
-print(m1.det())
-print(m1.inverse())
+m2=random_matrix()
+print(m2)
 
 #TODO increase max digits list by 1 if there is a double, aka make it work with decimals
+#TODO fix strings, sometimes it doesnt work with 10
