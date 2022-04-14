@@ -23,7 +23,7 @@ class Matrix:
             small_s="|"
             counter=0
             while counter<len(small_list):
-                small_s+=str(small_list[counter]).center(self.max_digits_list[counter]+1)
+                small_s+=str(small_list[counter]).center(self.max_digits_list[counter]+2)
                 counter+=1
             big_s_list.append(small_s)
         while all([s[-1]==' ' for s in big_s_list]): big_s_list=[b[:-1] for b in big_s_list]
@@ -93,8 +93,7 @@ def random_matrix(rows=3,cols=3,min=0,max=10):
         rand_list.append(random.randint(min,max))
     return Matrix(rows,cols,rand_list)
 m1=Matrix(3,3,[1,2,3,4,5,6,7,8,10])
-m2=random_matrix()
-print(m2)
+m2=random_matrix(5,5)
+print(m2.inverse())
 
 #TODO increase max digits list by 1 if there is a double, aka make it work with decimals
-#TODO fix strings, sometimes it doesnt work with 10
