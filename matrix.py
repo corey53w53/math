@@ -20,8 +20,8 @@ class Matrix:
             for r in range(self.row):
                 small_list.append(self.list_rows[r][c])
             self.list_cols.append(small_list)
-        self.max_digits_list = [len(
-            str(max([v for v in c]+[abs(10*v) for v in c if v < 0]))) for c in self.list_cols]
+        self.max_digits_list = [max([len(str(v)) for v in col])
+                                for col in self.list_cols]
 
     def __str__(self):
         big_s_list = []
@@ -112,9 +112,11 @@ class Matrix:
         m = self.cofactor()
         return m.transpose()
 
-    def inverse(self):
+    def inverse(self, r=2):
+        """ param r: number of decimals to round to """
         m = self.adjoint()
-        new_raw_values = [round(value/self.det(), 2) for value in m.raw_values]
+        new_raw_values = [round(value/self.det(), r)
+                          for value in m.raw_values]
         return Matrix(self.row, self.col, new_raw_values)
 
 
@@ -125,8 +127,7 @@ def random_matrix(rows=3, cols=3, min=0, max=10):
     return Matrix(rows, cols, rand_list)
 
 
-m1 = Matrix(3, 3, [1, 2, 3, 4, 5, 6, 7, 8, 10])
+m1 = Matrix(3, 3, [-1.11, 2, 3, 4, 5, 6, 7, 8, 10])
 m2 = random_matrix(5, 5)
 print(m2.inverse())
-
 # TODO increase max digits list by 1 if there is a double, aka make it work with decimals
