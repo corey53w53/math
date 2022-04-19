@@ -26,7 +26,7 @@ class Matrix:
         self.max_digits_list = [max([len(str(v)) for v in col])
                                 for col in self.list_cols]
         for small_list in self.list_rows:
-            small_s = "|"
+            small_s = ""
             counter = 0
             while counter < len(small_list):
                 small_s += str(small_list[counter]
@@ -35,9 +35,11 @@ class Matrix:
             big_s_list.append(small_s)
         while all([s[-1] == ' ' for s in big_s_list]):
             big_s_list = [b[:-1] for b in big_s_list]
+        while all([s[0] == ' ' for s in big_s_list]):
+            big_s_list = [b[1:] for b in big_s_list]
         big_s = ""
         for s in big_s_list:
-            big_s += s+"|\n"
+            big_s += "|"+s+"|\n"
         return big_s
 
     def __add__(self, m2):
@@ -119,8 +121,11 @@ class Matrix:
                           for value in m.raw_values]
         return Matrix(self.row, self.col, new_raw_values)
 
+    def sum(self):
+        return sum(self.raw_values)
 
-def random_matrix(rows=3, cols=3, min=0, max=10):
+
+def random_matrix(rows=3, cols=3, min=0, max=3):
     rand_list = []
     for _ in range(rows*cols):
         rand_list.append(random.randint(min, max))
@@ -129,5 +134,5 @@ def random_matrix(rows=3, cols=3, min=0, max=10):
 
 m1 = Matrix(3, 3, [-1.11, 2, 3, 4, 5, 6, 7, 8, 10])
 m2 = random_matrix(5, 5)
+print(m2)
 print(m2.inverse())
-# TODO increase max digits list by 1 if there is a double, aka make it work with decimals
