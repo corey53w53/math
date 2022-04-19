@@ -20,11 +20,11 @@ class Matrix:
             for r in range(self.row):
                 small_list.append(self.list_rows[r][c])
             self.list_cols.append(small_list)
-        self.max_digits_list = [max([len(str(v)) for v in col])
-                                for col in self.list_cols]
 
     def __str__(self):
         big_s_list = []
+        self.max_digits_list = [max([len(str(v)) for v in col])
+                                for col in self.list_cols]
         for small_list in self.list_rows:
             small_s = "|"
             counter = 0
