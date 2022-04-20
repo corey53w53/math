@@ -1,6 +1,5 @@
 import random
 
-
 class Matrix:
     def __init__(self, row, col, values):
         assert (row*col == len(values)
