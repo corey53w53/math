@@ -1,5 +1,5 @@
 from random import *
-num_sims=100000
+num_sims=1000000
 round_num_sum=0
 hanks_wins=0
 for _ in range(num_sims):
@@ -7,14 +7,14 @@ for _ in range(num_sims):
     tchips=2
     num_rounds=0
     while hchips and tchips:
-        if randint(1,3)==1:
-            hchips+=1
-            tchips-=1
-        else:
+        if randint(0,2):
             hchips-=1
             tchips+=1
+        else:
+            hchips+=1
+            tchips-=1
         num_rounds+=1
-    if tchips==0:
+    if hchips:
         hanks_wins+=1
     round_num_sum+=num_rounds
 print(f'Average number of rounds in {num_sims} trials: {round_num_sum/num_sims}')
