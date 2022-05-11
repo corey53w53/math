@@ -1,5 +1,5 @@
 from random import *
-num_sims=1000000
+num_sims=10000000
 round_num_sum=0
 hanks_wins=0
 for _ in range(num_sims):
