@@ -1,5 +1,6 @@
 import random
 
+
 class Matrix:
     def __init__(self, row, col, values):
         assert (row*col == len(values)
@@ -56,8 +57,7 @@ class Matrix:
         raw_values = []
         for row in self.list_rows:
             for col in m2.list_cols:
-                raw_values.append(sum([row[c]*col[c]
-                                  for c in range(self.col)]))
+                raw_values.append(sum([row[c]*col[c]for c in range(self.col)]))
         return Matrix(self.row, m2.col, raw_values)
 
     def minor(self, row_num, col_num):
@@ -116,8 +116,7 @@ class Matrix:
     def inverse(self, r=2):
         """ param r: number of decimals to round to """
         m = self.adjoint()
-        new_raw_values = [round(value/self.det(), r)
-                          for value in m.raw_values]
+        new_raw_values = [round(value/self.det(), r) for value in m.raw_values]
         return Matrix(self.row, self.col, new_raw_values)
 
     def sum(self):
