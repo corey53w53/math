@@ -1,6 +1,7 @@
 #Corey Wang Discrete 6-6 Homework
+from functools import reduce
 from random import *
-num_sims=10000000
+num_sims=100000
 num_rounds_sum=0
 hanks_wins=0
 for _ in range(num_sims):
@@ -21,6 +22,7 @@ for _ in range(num_sims):
 print(f'Average number of rounds in {num_sims} trials: {num_rounds_sum/num_sims}')
 print(f'Hank\'s wins: {hanks_wins}')
 print(f'Ted\'s wins: {num_sims-hanks_wins}')
+reduce
 
 
 # def ncr(n, r):
