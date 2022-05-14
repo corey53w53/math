@@ -23,19 +23,15 @@ class Fraction:
         self.negative = num*den < 0
 
     def simplify(self):
-        negative = self.num*self.den < 0
         factor = gcf(abs(self.num), abs(self.den))
         self.num //= factor
         self.den //= factor
-        if negative:
-            self.num *= -1
         return self
 
     def __str__(self):
         return f'{self.num}/{self.den}'
 
     def __add__(self, other):
-
         return Fraction((self.num*other.den)+(other.num*self.den), self.den*other.den).simplify()
 
     def __sub__(self, other):
@@ -51,7 +47,10 @@ class Fraction:
         return Fraction(self.den, self.num)
 
 
-f = Fraction(1, -2)
-f1 = Fraction(1, 6)
+f = Fraction(1, 6)
+f1 = Fraction(3, 6)
 for a in ["+", "-", "/", "*"]:
     exec("print(f" + a + "f1)")
+
+
+# TODO make negative numbers work
