@@ -11,20 +11,19 @@ class Point:
 
 
 class Circle:
+    def set_radius(self, radius):
+        self.radius = radius
+        self.area = 0.5*math.pi*(self.radius**2)
+
     def __init__(self, center, radius):
         self.center = center
-        self.radius = radius
-        self.update_area()
+        self.set_radius(radius)
 
     def __str__(self):
         return(f'center: {self.center}\nradius: {self.radius}')
 
     def expand_rad(self, inc):
-        self.radius += inc
-        self.update_area()
-
-    def update_area(self):
-        self.area = 0.5*math.pi*(self.radius**2)
+        self.set_radius(self.radius+inc)
 
     def contains_point(self, point):
         x_diff = abs(self.center.x-point.x)
@@ -60,3 +59,9 @@ class Line:
         x_intersect = y_diff/s_diff
         y_intersect = self.calc_y(x_intersect)
         return(x_intersect, y_intersect)
+
+
+a = Circle(3, 4)
+print(a.area)
+a.expand_rad(2)
+print(a.area)
