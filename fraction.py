@@ -34,7 +34,19 @@ class Fraction:
     def __add__(self, other):
         return Fraction((self.num*other.den)+(other.num*self.den), self.den*other.den).simplify()
 
+    def __sub__(self, other):
+        return Fraction((self.num*other.den)-(other.num*self.den), self.den*other.den).simplify()
 
-f = Fraction(3, 6)
-f1 = Fraction(6, 6)
-print(f+f1)
+    def __mul__(self, other):
+        return Fraction(self.num*other.num, self.den*other.den).simplify()
+
+    def __truediv__(self, other):
+        return self*other.reciprocol()
+
+    def reciprocol(self):
+        return Fraction(self.den, self.num)
+
+
+f = Fraction(1, 9)
+f1 = Fraction(1, 6)
+print(f/f1)
