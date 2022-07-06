@@ -130,7 +130,5 @@ def random_matrix(rows=3, cols=3, min=0, max=3):
     return Matrix(rows, cols, rand_list)
 
 
-m1 = Matrix(3, 3, [-1.11, 2, 3, 4, 5, 6, 7, 8, 10])
-m2 = random_matrix(5, 5)
-print(m2)
-print(m2.inverse())
+m1 = Matrix(3, 3, [-1, 2, 3, 4, 5, 6, 7, 8, 10])
+print(m1.sign_rule())
